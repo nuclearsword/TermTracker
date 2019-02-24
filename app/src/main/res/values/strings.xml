@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">TermTracker</string>
+    <string name="title_activity_term_list">TermListActivity</string>
+    <string-array name="status_array">
+        <item>In Progress</item>
+        <item>Completed</item>
+        <item>Dropped</item>
+        <item>Plan to Take</item>
+    </string-array>
+    <string-array name="assessment_type_array">
+        <item>Performance</item>
+        <item>Objective</item>
+    </string-array>
+</resources>
