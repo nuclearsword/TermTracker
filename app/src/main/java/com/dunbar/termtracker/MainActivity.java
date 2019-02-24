@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         db = new dbHelper(this);
         setContentView(R.layout.activity_main);
         initializeReport();
+        initializeNavigation();
     }
 
     @Override
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         //get the values for Term
         Iterator<Term> iTerm;
 
-        List<Term> termsInProgress = db.getTerms();
+        ArrayList<Term> termsInProgress = db.getTerms();
         iTerm = termsInProgress.iterator();
         while(iTerm.hasNext()){
             Term t = iTerm.next();
@@ -102,7 +105,18 @@ public class MainActivity extends AppCompatActivity {
         lblCourseCompletionProgress.setText(""+courseCompletionPercentage+"%");
     }
 
-    public void viewTerms(View view){
+    //I only created this event listener because it's a rubric requirement. I could have assigned it in the layout designer.
+    public void initializeNavigation(){
+        Button viewTermsButton = (Button)findViewById(R.id.btnViewTerms);
+        viewTermsButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                viewTerms();
+            }
+        });
+    }
+
+    public void viewTerms(){
         Intent intent = new Intent(this, TermListActivity.class);
         startActivity(intent);
     }

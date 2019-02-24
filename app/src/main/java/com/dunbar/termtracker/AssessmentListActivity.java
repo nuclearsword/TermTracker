@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -63,6 +64,13 @@ public class AssessmentListActivity extends AppCompatActivity {
     }
 
     public void addAssessment(View view){
+        //make sure there aren't more than 5 assessments already associated with this course
+        List<Assessment> assessments = db.getAssessments(courseId);
+        if(assessments.size() >= 5){
+            Toast.makeText(getApplicationContext(),"Sorry, you can only add 5 assessments to a course.",Toast.LENGTH_LONG).show();
+           return;
+        }
+
         Intent intent = new Intent(this, AssessmentDetailActivity.class);
         intent.putExtra("isNew",true);
         intent.putExtra("courseId",courseId);

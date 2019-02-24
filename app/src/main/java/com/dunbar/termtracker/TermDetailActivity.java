@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class TermDetailActivity extends AppCompatActivity {
     dbHelper db;
@@ -79,8 +81,25 @@ public class TermDetailActivity extends AppCompatActivity {
     }
 
     public void deleteTerm(View view){
-        db.deleteTerm(term.getId());
-        goBack();
+        //do nothing if termId is null (meaning this is a new term)
+        if(term.getId() == 0){
+            Toast.makeText(getApplicationContext(),"Delete Failed - You must save this term before you can delete it. Press back to cancel the term.",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        //make sure the term doesn't have courses associated with it first.
+        List<Course> associatedCourses = db.getCourses(term.getId());
+        if(associatedCourses.size() > 0){
+            Toast.makeText(getApplicationContext(),"Delete failed - this term has courses associated to it. You must delete them first.",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        //Only delete if the required conditions are met
+        if(associatedCourses.size() == 0 && term.getId() != 0){
+            db.deleteTerm(term.getId());
+            Toast.makeText(getApplicationContext(),"Delete success!",Toast.LENGTH_LONG).show();
+            goBack();
+        }
     }
 
     public void viewCourses(View view){
