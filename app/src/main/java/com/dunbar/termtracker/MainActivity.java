@@ -118,7 +118,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void processAlerts(){
         //find courses that start today
+        //find courses that end today
+        //find assessments starting today
         //find assessments due today
+
+        //send alerts for the identified items
     }
 
     public void viewTerms(){

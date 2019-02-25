@@ -6,6 +6,7 @@ import java.util.Date;
 public class Assessment {
     private int id;
     private int courseId;
+    private Date startDate;
     private Date dueDate;
     private String type;
     private String notes;
@@ -29,6 +30,14 @@ public class Assessment {
 
     public void setCourseId(int courseId) {
         this.courseId = courseId;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public Date getDueDate() {

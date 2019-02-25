@@ -14,7 +14,7 @@ public class dbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "scheduler.db";
 
     public dbHelper(Context context) {
-        super(context, DATABASE_NAME, null, 5);
+        super(context, DATABASE_NAME, null, 6);
     }
 
     @Override
@@ -38,6 +38,7 @@ public class dbHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE ASSESSMENT(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "courseId INTEGER, " +
+                "startDate date, " +
                 "dueDate date, " +
                 "type TEXT, " +
                 "notes TEXT, " +
@@ -292,6 +293,7 @@ public class dbHelper extends SQLiteOpenHelper {
             try{
                 assessmentToReturn.setType(cursor.getString(cursor.getColumnIndex("type")));
                 assessmentToReturn.setCourseId(cursor.getInt(cursor.getColumnIndex("courseId")));
+                assessmentToReturn.setStartDate((new SimpleDateFormat("MM/dd/yyyy")).parse(cursor.getString(cursor.getColumnIndex("startDate"))));
                 assessmentToReturn.setDueDate((new SimpleDateFormat("MM/dd/yyyy")).parse(cursor.getString(cursor.getColumnIndex("dueDate"))));
                 assessmentToReturn.setNotes(cursor.getString(cursor.getColumnIndex("notes")));
                 int alertFlag = cursor.getInt(cursor.getColumnIndex("alert"));
@@ -319,6 +321,7 @@ public class dbHelper extends SQLiteOpenHelper {
                     assessment.setId(cursor.getInt(cursor.getColumnIndex("ID")));
                     assessment.setType(cursor.getString(cursor.getColumnIndex("type")));
                     assessment.setCourseId(cursor.getInt(cursor.getColumnIndex("courseId")));
+                    assessment.setStartDate((new SimpleDateFormat("MM/dd/yyyy")).parse(cursor.getString(cursor.getColumnIndex("startDate"))));
                     assessment.setDueDate((new SimpleDateFormat("MM/dd/yyyy")).parse(cursor.getString(cursor.getColumnIndex("dueDate"))));
                     assessment.setNotes(cursor.getString(cursor.getColumnIndex("notes")));
                     int alertFlag = cursor.getInt(cursor.getColumnIndex("alert"));
@@ -340,6 +343,7 @@ public class dbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("courseId",assessment.getCourseId());
         values.put("type", assessment.getType());
+        values.put("startDate",(new SimpleDateFormat("MM/dd/yyyy")).format(assessment.getStartDate()));
         values.put("dueDate",(new SimpleDateFormat("MM/dd/yyyy")).format(assessment.getDueDate()));
         values.put("notes", assessment.getNotes());
         int alertFlag;
@@ -362,6 +366,7 @@ public class dbHelper extends SQLiteOpenHelper {
         values.put("id",assessment.getId());
         values.put("courseId",assessment.getCourseId());
         values.put("type", assessment.getType());
+        values.put("startDate",(new SimpleDateFormat("MM/dd/yyyy")).format(assessment.getStartDate()));
         values.put("dueDate",(new SimpleDateFormat("MM/dd/yyyy")).format(assessment.getDueDate()));
         values.put("notes", assessment.getNotes());
         int alertFlag;
