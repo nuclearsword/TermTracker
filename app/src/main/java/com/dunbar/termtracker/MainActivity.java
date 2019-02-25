@@ -116,6 +116,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void processAlerts(){
+        //find courses that start today
+        //find assessments due today
+    }
+
     public void viewTerms(){
         Intent intent = new Intent(this, TermListActivity.class);
         startActivity(intent);

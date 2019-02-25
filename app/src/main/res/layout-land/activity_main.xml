@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Progress Report"
+            android:textSize="24sp"
+            android:paddingTop="50dp"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp">
+            <TableRow>
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
+                    android:layout_height="19dp"
+                    android:text="Terms in Progress:"
+                    />
+                <TextView
+                    android:id="@+id/txtTermsInProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:padding="3dp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Completed Terms:" />
+                <TextView
+                    android:id="@+id/txtCompletedTerms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:padding="3dp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Terms:"/>
+                <TextView
+                    android:id="@+id/txtTotalTerms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:padding="3dp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Term Progress Percentage:"/>
+                <TextView
+                    android:id="@+id/txtTermProgressPercentage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:padding="3dp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Courses in Progress:" />
+                <TextView
+                    android:id="@+id/txtCoursesInProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:padding="3dp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Completed Courses:"/>
+                <TextView
+                    android:id="@+id/txtCompletedCourses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:padding="3dp"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total Courses:" />
+                <TextView
+                    android:id="@+id/txtTotalCourses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:padding="3dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Course Progress Percentage:" />
+                <TextView
+                    android:id="@+id/txtCourseProgressPercentage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:padding="3dp"/>
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/lblNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Navigation:"
+            android:textSize="24sp" />
+        <Button
+            android:id="@+id/btnViewTerms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Terms"/>
+    </LinearLayout>
+
+
+</LinearLayout>

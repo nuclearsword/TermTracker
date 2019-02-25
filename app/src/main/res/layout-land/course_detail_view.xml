@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/lblCourseTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Course Detail"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title:" />
+
+            <EditText
+                android:id="@+id/txtCourseTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start Date" />
+            <EditText
+                android:id="@+id/txtCourseStartDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="End Date" />
+            <EditText
+                android:id="@+id/txtCourseEndDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status" />
+
+            <Spinner
+                android:id="@+id/courseStatusDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btnViewMentors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="viewMentors"
+                android:text="View Mentors" />
+
+            <Button
+                android:id="@+id/btnViewAssessments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="viewAssessments"
+                android:text="View Assessments" />
+
+            <Button
+                android:id="@+id/btnViewNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="viewCourseNotes"
+                android:text="View Notes"/>
+            <Button
+                android:id="@+id/btnShareCourse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Share" />
+
+            <Button
+                android:id="@+id/btnSaveCourse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="saveCourse"
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/btnDeleteCourse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="deleteCourse"
+                android:text="Delete" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
