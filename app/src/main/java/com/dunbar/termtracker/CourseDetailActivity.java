@@ -114,6 +114,15 @@ public class CourseDetailActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void shareCourse(View view){
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT,course.toString());
+        intent.putExtra(Intent.EXTRA_TEXT,"Hello! The " + course.getTitle() +" course starts on " + formatter.format(course.getStartDate()) + " and ends on " + formatter.format(course.getEndDate()) + ".");
+        startActivity(Intent.createChooser(intent, "Choose sharing method"));
+    }
+
     public void goBack(){
         super.onBackPressed();
     }

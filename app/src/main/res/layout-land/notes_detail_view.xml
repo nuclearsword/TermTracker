@@ -30,6 +30,13 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnShareNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="shareCourseNotes"
+                android:text="Share" />
             <Button
                 android:id="@+id/btnSaveNote"
                 android:layout_width="match_parent"

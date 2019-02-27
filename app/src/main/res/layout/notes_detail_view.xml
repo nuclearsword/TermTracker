@@ -22,6 +22,13 @@
         android:inputType="textMultiLine" />
 
     <Button
+        android:id="@+id/btnShareNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="shareCourseNotes"
+        android:text="Share" />
+
+    <Button
         android:id="@+id/btnSaveNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

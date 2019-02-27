@@ -103,11 +103,12 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         goBack();
     }
 
-    public void share(View view){
+    public void shareAssessment(View view){
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         Intent intent = new Intent(android.content.Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT,assessment.toString());
-        intent.putExtra(Intent.EXTRA_TEXT,"Hello! This shared assessment starts on " + assessment.getStartDate().toString() + " and is due on " + assessment.getDueDate().toString() + ".");
+        intent.putExtra(Intent.EXTRA_TEXT,"Hello! This shared assessment starts on " + formatter.format(assessment.getStartDate()) + " and is due on " + formatter.format(assessment.getDueDate()) + ".");
         startActivity(Intent.createChooser(intent, "Choose sharing method"));
     }
 

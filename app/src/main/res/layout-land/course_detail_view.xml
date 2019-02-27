@@ -90,10 +90,12 @@
                 android:layout_height="wrap_content"
                 android:onClick="viewCourseNotes"
                 android:text="View Notes"/>
+
             <Button
                 android:id="@+id/btnShareCourse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="shareCourse"
                 android:text="Share" />
 
             <Button

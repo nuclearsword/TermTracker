@@ -65,6 +65,15 @@ public class CourseNotesDetailActivity extends AppCompatActivity {
         goBack();
     }
 
+    public void shareCourseNotes(View view){
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT,note.toString());
+        intent.putExtra(Intent.EXTRA_TEXT,note.getNotes());
+        startActivity(Intent.createChooser(intent, "Choose sharing method"));
+    }
+
     public void goBack(){
         super.onBackPressed();
     }

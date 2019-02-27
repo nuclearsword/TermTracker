@@ -81,8 +81,8 @@
         android:id="@+id/btnShareAssessment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="share"
-        android:text="Share Via Email" />
+        android:onClick="shareAssessment"
+        android:text="Share" />
 
 
 </LinearLayout>
