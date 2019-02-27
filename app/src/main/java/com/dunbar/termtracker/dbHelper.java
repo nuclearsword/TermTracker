@@ -338,6 +338,36 @@ public class dbHelper extends SQLiteOpenHelper {
         }
         return assessmentsToReturn;
     }
+    public ArrayList<Assessment> getAssessments(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM ASSESSMENT",null);
+
+        ArrayList<Assessment> assessmentsToReturn = new ArrayList<>();
+
+        if(cursor.getCount() > 0){
+            while(cursor.moveToNext()){
+                try{
+                    Assessment assessment = new Assessment();
+                    assessment.setId(cursor.getInt(cursor.getColumnIndex("ID")));
+                    assessment.setType(cursor.getString(cursor.getColumnIndex("type")));
+                    assessment.setCourseId(cursor.getInt(cursor.getColumnIndex("courseId")));
+                    assessment.setStartDate((new SimpleDateFormat("MM/dd/yyyy")).parse(cursor.getString(cursor.getColumnIndex("startDate"))));
+                    assessment.setDueDate((new SimpleDateFormat("MM/dd/yyyy")).parse(cursor.getString(cursor.getColumnIndex("dueDate"))));
+                    assessment.setNotes(cursor.getString(cursor.getColumnIndex("notes")));
+                    int alertFlag = cursor.getInt(cursor.getColumnIndex("alert"));
+                    if(alertFlag == 0){
+                        assessment.setAlert(false);
+                    }else{
+                        assessment.setAlert(true);
+                    }
+                    assessmentsToReturn.add(assessment);
+                }catch(ParseException e){
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        return assessmentsToReturn;
+    }
     public Boolean insertAssessment(Assessment assessment){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

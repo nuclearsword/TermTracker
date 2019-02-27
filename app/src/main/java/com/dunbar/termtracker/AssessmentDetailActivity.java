@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import java.text.SimpleDateFormat;
 
 public class AssessmentDetailActivity extends AppCompatActivity {
     dbHelper db;
+    EditText txtStartDate;
     EditText txtDueDate;
     EditText txtNotes;
     Spinner typeDropdown;
@@ -21,6 +23,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
     Intent intent;
     SimpleDateFormat formatter;
     Assessment assessment;
+    Button share;
     int courseId;
 
     @Override
@@ -33,8 +36,11 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         intent = getIntent();
         courseId = intent.getExtras().getInt("courseId");
 
+        share = findViewById(R.id.btnShareAssessment);
+
         formatter = new SimpleDateFormat("MM/dd/yyyy");
 
+        txtStartDate = (EditText)findViewById(R.id.txtAssessmentStartDate);
         txtDueDate = (EditText)findViewById(R.id.txtAssessmentDateDue);
         typeDropdown = (Spinner)findViewById(R.id.assessmentTypeDropdown);
         txtNotes = (EditText)findViewById(R.id.txtAssessmentNotes);
@@ -61,6 +67,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
 
     public void loadExistingAssessment(int assessmentId){
         assessment = db.getAssessment(assessmentId);
+        txtStartDate.setText(formatter.format(assessment.getStartDate()));
         txtDueDate.setText(formatter.format(assessment.getDueDate()));
         txtNotes.setText(assessment.getNotes());
         int spinnerPosition = spinnerAdapter.getPosition(assessment.getType());
@@ -71,6 +78,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         //grab input from the user
         try {
             assessment.setCourseId(courseId);
+            assessment.setStartDate(formatter.parse(txtStartDate.getText().toString()));
             assessment.setDueDate(formatter.parse(txtDueDate.getText().toString()));
             assessment.setNotes(txtNotes.getText().toString());
             assessment.setType(typeDropdown.getSelectedItem().toString());
@@ -93,6 +101,14 @@ public class AssessmentDetailActivity extends AppCompatActivity {
     public void deleteAssessment(View view){
         db.deleteAssessment(assessment.getId());
         goBack();
+    }
+
+    public void share(View view){
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT,assessment.toString());
+        intent.putExtra(Intent.EXTRA_TEXT,"Hello! This shared assessment starts on " + assessment.getStartDate().toString() + " and is due on " + assessment.getDueDate().toString() + ".");
+        startActivity(Intent.createChooser(intent, "Choose sharing method"));
     }
 
     public void goBack(){

@@ -75,6 +75,6 @@ public class Assessment {
     @Override
     public String toString(){
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-        return this.type + " [" + formatter.format(this.dueDate) + "]";
+        return this.type + " [" + formatter.format(this.startDate) + " - " + formatter.format(this.dueDate) + "]";
     }
 }

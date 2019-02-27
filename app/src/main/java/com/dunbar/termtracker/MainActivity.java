@@ -1,8 +1,11 @@
 package com.dunbar.termtracker;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import static android.text.Html.fromHtml;
 
 public class MainActivity extends AppCompatActivity {
     dbHelper db;
@@ -21,12 +26,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initializeReport();
         initializeNavigation();
+        processAlerts();
     }
 
     @Override
     public void onResume(){
         super.onResume();
         initializeReport();
+        processAlerts();
     }
 
     public void initializeReport(){
@@ -117,12 +124,65 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void processAlerts(){
-        //find courses that start today
-        //find courses that end today
-        //find assessments starting today
-        //find assessments due today
+        List<Course> courses = db.getCourses();
+        List<Assessment> assessments = db.getAssessments();
+        int coursesStartingToday = 0;
+        int coursesEndingToday = 0;
+        int assessmentsStartingToday = 0;
+        int assessmentsDueToday = 0;
 
+        //find courses that start today
+        for(Course c : courses){
+            if(DateUtils.isToday(c.getStartDate().getTime())){
+                coursesStartingToday++;
+            }
+        }
+        //find courses that end today
+        for(Course c : courses){
+            if(DateUtils.isToday(c.getEndDate().getTime())){
+                coursesEndingToday++;
+            }
+        }
+        //find assessments starting today
+        for(Assessment a : assessments){
+            if(DateUtils.isToday(a.getStartDate().getTime())){
+                assessmentsStartingToday++;
+            }
+        }
+        //find assessments due today
+        for(Assessment a : assessments){
+            if(DateUtils.isToday(a.getDueDate().getTime())){
+                assessmentsDueToday++;
+            }
+        }
         //send alerts for the identified items
+        int totalAlert = coursesStartingToday + coursesEndingToday + assessmentsStartingToday + assessmentsDueToday;
+        if(totalAlert > 0){
+            //create alert
+            showAlert(coursesStartingToday, coursesEndingToday, assessmentsStartingToday, assessmentsDueToday);
+        }
+    }
+
+    public void showAlert(int coursesStartingToday, int coursesEndingToday, int assessmentsStartingToday, int assessmentsDueToday){
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setTitle("Alert!");
+        alertBuilder.setMessage(
+                fromHtml(
+                        "<div><label>Courses Starting Today: </label> " + coursesStartingToday + "</div>" +
+                        "<div><label>Courses Ending Today: </label> " + coursesEndingToday + "</div>" +
+                        "<div><label>Assessments Starting Today: </label> " + assessmentsStartingToday + "</div>" +
+                        "<div><label>Assessments Due Today: </label> " + assessmentsDueToday + "</div>"));
+
+        alertBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertBuilder.setCancelable(true);
+
+        AlertDialog alert = alertBuilder.create();
+        alert.show();
     }
 
     public void viewTerms(){

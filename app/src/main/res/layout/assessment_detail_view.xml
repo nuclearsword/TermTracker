@@ -78,9 +78,10 @@
         android:text="Delete" />
 
     <Button
-        android:id="@+id/btnShareEmail"
+        android:id="@+id/btnShareAssessment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="share"
         android:text="Share Via Email" />
 
 
