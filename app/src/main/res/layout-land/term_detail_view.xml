@@ -43,7 +43,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:hint="01/01/2019"/>
 
             <TextView
                 android:id="@+id/textView8"
@@ -56,7 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:hint="01/01/2019"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="300dp"

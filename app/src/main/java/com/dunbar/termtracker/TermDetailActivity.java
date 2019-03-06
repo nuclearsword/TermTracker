@@ -103,9 +103,16 @@ public class TermDetailActivity extends AppCompatActivity {
     }
 
     public void viewCourses(View view){
+        //check if this term has been saved. If not, show an error
+        if(term.getId() <= 0){
+            Toast.makeText(getApplicationContext(),"You cannot create courses until the term has been saved.",Toast.LENGTH_LONG).show();
+            return;
+        }
+
         Intent intent = new Intent(this, CourseListActivity.class);
         intent.putExtra("termId",term.getId());
         startActivity(intent);
+
     }
 
     public void goBack(){

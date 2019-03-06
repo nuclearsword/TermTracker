@@ -41,7 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:hint="01/01/2019"/>
 
             <TextView
                 android:id="@+id/textView17"
@@ -53,7 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="date"
+                android:hint="01/01/2019"/>
 
             <TextView
                 android:id="@+id/textView18"
@@ -63,6 +65,16 @@
 
             <Spinner
                 android:id="@+id/courseStatusDropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txtCourseAlert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alert Option" />
+
+            <Spinner
+                android:id="@+id/courseAlertOptionDropdown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

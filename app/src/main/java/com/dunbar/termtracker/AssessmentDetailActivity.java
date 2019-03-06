@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +20,9 @@ public class AssessmentDetailActivity extends AppCompatActivity {
     EditText txtDueDate;
     EditText txtNotes;
     Spinner typeDropdown;
+    Spinner alertOptionDropdown;
     ArrayAdapter spinnerAdapter;
+    ArrayAdapter alertSpinnerAdapter;
     Intent intent;
     SimpleDateFormat formatter;
     Assessment assessment;
@@ -43,6 +46,7 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         txtStartDate = (EditText)findViewById(R.id.txtAssessmentStartDate);
         txtDueDate = (EditText)findViewById(R.id.txtAssessmentDateDue);
         typeDropdown = (Spinner)findViewById(R.id.assessmentTypeDropdown);
+        alertOptionDropdown = (Spinner)findViewById(R.id.assessmentAlertOptionDropdown);
         txtNotes = (EditText)findViewById(R.id.txtAssessmentNotes);
         String[] types = getResources().getStringArray(R.array.assessment_type_array);
         spinnerAdapter = new ArrayAdapter<String>(
@@ -51,6 +55,13 @@ public class AssessmentDetailActivity extends AppCompatActivity {
                 types
         );
         typeDropdown.setAdapter(spinnerAdapter);
+        String[] alertOptions = getResources().getStringArray(R.array.alert_type_array);
+        alertSpinnerAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_spinner_dropdown_item,
+                alertOptions
+        );
+        alertOptionDropdown.setAdapter(alertSpinnerAdapter);
 
         if(intent.getExtras().getBoolean("isNew")){
             createNewAssessment();
@@ -72,6 +83,13 @@ public class AssessmentDetailActivity extends AppCompatActivity {
         txtNotes.setText(assessment.getNotes());
         int spinnerPosition = spinnerAdapter.getPosition(assessment.getType());
         typeDropdown.setSelection(spinnerPosition);
+        int alertSpinnerPosition = 0;
+        if(assessment.getAlert()){
+            alertSpinnerPosition = alertSpinnerAdapter.getPosition("ON");
+        }else{
+            alertSpinnerPosition = alertSpinnerAdapter.getPosition("OFF");
+        }
+        alertOptionDropdown.setSelection(alertSpinnerPosition);
     }
 
     public void saveAssessment(View view){
@@ -82,7 +100,11 @@ public class AssessmentDetailActivity extends AppCompatActivity {
             assessment.setDueDate(formatter.parse(txtDueDate.getText().toString()));
             assessment.setNotes(txtNotes.getText().toString());
             assessment.setType(typeDropdown.getSelectedItem().toString());
-            assessment.setAlert(false); //TODO - CHANGE THIS!!!!!!!!
+            if(alertOptionDropdown.getSelectedItem().toString().equals("ON")){
+                assessment.setAlert(true);
+            }else{
+                assessment.setAlert(false);
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -99,11 +121,21 @@ public class AssessmentDetailActivity extends AppCompatActivity {
     }
 
     public void deleteAssessment(View view){
+        //show error if assessment has not been saved
+        if(assessment.getId() == 0){
+            Toast.makeText(getApplicationContext(),"You cannot delete an assessment that has not been saved.",Toast.LENGTH_LONG).show();
+            return;
+        }
         db.deleteAssessment(assessment.getId());
         goBack();
     }
 
     public void shareAssessment(View view){
+        //show error if assessment has not been saved
+        if(assessment.getId() == 0){
+            Toast.makeText(getApplicationContext(),"You cannot share an assessment that has not been saved.",Toast.LENGTH_LONG).show();
+            return;
+        }
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         Intent intent = new Intent(android.content.Intent.ACTION_SEND);
         intent.setType("text/plain");

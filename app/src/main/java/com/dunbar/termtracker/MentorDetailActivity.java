@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
@@ -74,6 +75,11 @@ public class MentorDetailActivity extends AppCompatActivity {
     }
 
     public void deleteMentor(View view){
+        //show error if assessment has not been saved
+        if(mentor.getId() == 0){
+            Toast.makeText(getApplicationContext(),"You cannot delete a note that has not been saved.",Toast.LENGTH_LONG).show();
+            return;
+        }
         db.deleteMentor(mentor.getId());
         goBack();
     }

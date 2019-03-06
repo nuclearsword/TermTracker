@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
@@ -61,11 +62,21 @@ public class CourseNotesDetailActivity extends AppCompatActivity {
     }
 
     public void deleteNote(View view){
+        //show error if assessment has not been saved
+        if(note.getId() == 0){
+            Toast.makeText(getApplicationContext(),"You cannot delete a note that has not been saved.",Toast.LENGTH_LONG).show();
+            return;
+        }
         db.deleteCourseNotes(note.getId());
         goBack();
     }
 
     public void shareCourseNotes(View view){
+        //show error if assessment has not been saved
+        if(note.getId() == 0){
+            Toast.makeText(getApplicationContext(),"You cannot share a note that has not been saved.",Toast.LENGTH_LONG).show();
+            return;
+        }
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
         Intent intent = new Intent(android.content.Intent.ACTION_SEND);
         intent.setType("text/plain");

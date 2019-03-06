@@ -11,4 +11,8 @@
         <item>Performance</item>
         <item>Objective</item>
     </string-array>
+    <string-array name="alert_type_array">
+        <item>ON</item>
+        <item>OFF</item>
+    </string-array>
 </resources>
